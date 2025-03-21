@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Waste Solution - Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-box">
+            <div class="auth-logo">
+                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Food Waste Solution Logo">
+            </div>
+            <h1>Welcome Back!</h1>
+            <p class="subtitle">Please login to continue to your dashboard</p>
+            
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            
+            <form action="{{ url_for('auth.login') }}" method="POST">
+                <div class="form-group">
+                    <label for="email">
+                        <i class="icon email-icon"></i>
+                    </label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">
+                        <i class="icon password-icon"></i>
+                    </label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                </div>
+                
+                <div class="form-options">
+                    <div class="remember-me">
+                        <input type="checkbox" id="remember" name="remember">
+                        <label for="remember">Stay logged in</label>
+                    </div>
+                    <a href="{{ url_for('auth.forgot_password') }}" class="forgot-password">I've forgotten my password</a>
+                </div>
+                
+                <button type="submit" class="btn-sign-in">SIGN IN</button>
+            </form>
+            
+            <div class="auth-footer">
+                <p>Don't have an account? <a href="{{ url_for('auth.signup') }}">Sign up here</a></p>
+                <!-- <a href="{{ url_for('main.index') }}" class="visit-site-btn">Visit site</a> -->
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
